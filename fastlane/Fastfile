@@ -21,3 +21,35 @@ platform :ios do
     # add actions here: https://docs.fastlane.tools/actions
   end
 end
+
+lane :release do
+  app_store_connect_api_key(
+    key_id: ENV['API_KEY_ID'],
+    issuer_id: ENV['API_ISSUER_ID'],
+    key_filepath: ENV['API_KEY_FILEPATH'],
+    duration: 1200, # optional (maximum 1200)
+    in_house: false # optional but may be required if using match/sigh
+  )
+
+  # Automatically loads Actions.lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
+  pilot
+  increment_build_number(xcodeproj: "./MiracleCircle5.xcodeproj")
+end
+
+lane :beta do
+  app_store_connect_api_key(
+    key_id: ENV['API_KEY_ID'],
+    issuer_id: ENV['API_ISSUER_ID'],
+    key_filepath: ENV['API_KEY_FILEPATH'],
+    duration: 1200, # optional (maximum 1200)
+    in_house: false # optional but may be required if using match/sigh
+  )
+
+  get_certificates           # invokes cert
+  get_provisioning_profile   # invokes sigh
+  increment_build_number(xcodeproj: "./MiracleCircle5.xcodeproj")
+  build_app(configuration: "Debug")
+  upload_to_testflight(
+    skip_waiting_for_build_processing: true
+  )
+end
