@@ -53,7 +53,7 @@ struct DragActionView: View {
     LazyVGrid(columns: columns, spacing: 30) {
       ForEach(0..<15) { index in
         Button {
-          
+          currentButtonIndex = index
         } label: {
           Image(systemName: icons[index % 5])
             .resizable()
@@ -66,11 +66,10 @@ struct DragActionView: View {
         .background(dragObserver(value: index))
         .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 10)))
         .controlSize(.large)
-        .highPriorityGesture( DragGesture(minimumDistance: 0, coordinateSpace: .global)
+        .highPriorityGesture(DragGesture(minimumDistance: 0, coordinateSpace: .global)
           .updating($dragLocation) { value, state, _ in
             state = value.location
           })
-        
       }
     }
     // 버튼 사이의 빈 공간을 눌렀을 때 인식
