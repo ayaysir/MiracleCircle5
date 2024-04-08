@@ -6,63 +6,104 @@
 //
 
 import SwiftUI
+import Tonic
 
-@available(iOS 16.0, *)
 struct RadialView2: View {
-  let keys = "C G D A E B F# Db Ab Eb Bb F".split(separator: " ")
-  let keysForSharp = "C G D A E B F# C# G# D# A# E#".split(separator: " ")
+  let notesWithStep5: [NoteClass] = [
+      .init(.C),
+      .init(.G),
+      .init(.D),
+      .init(.A),
+      .init(.E),
+      .init(.B),
+      .init(.F, accidental: .sharp),
+      .init(.D, accidental: .flat),
+      .init(.A, accidental: .flat),
+      .init(.E, accidental: .flat),
+      .init(.B, accidental: .flat),
+      .init(.F),
+  ]
+  
+  @State private var statusText = "StatusText"
+  
+  func setStatusText(_ key: NoteClass, type: ChordType) {
+    let chord = Chord(key, type: type)
+    statusText = "\(chord.description): \(chord.noteClasses.description)"
+  }
   
   var body: some View {
-    ZStack {
-      RadialLayout {
-        ForEach(keys, id: \.self) { key in
-          Text("\(key)")
-            .font(.system(size: 24, weight: .bold))
+    VStack {
+      Text(statusText)
+        .font(.title)
+      if #available(iOS 16.0, *) {
+        ZStack {
+          RadialLayout {
+            ForEach(notesWithStep5, id: \.self) { key in
+              Button {
+                setStatusText(key, type: .majorSeventh)
+              } label: {
+                Text("\(key)")
+                  .font(.system(size: 24, weight: .bold))
+              }
+              .foregroundStyle(.primary)
+            }
+          }
+          .frame(width: 480)
+          
+          RadialLayout {
+            ForEach(notesWithStep5.indices, id: \.self) { index in
+              let adjustedIndex = (index + 3) % 12
+              Button {
+                setStatusText(notesWithStep5[adjustedIndex], type: .minorSeventh)
+              } label: {
+                Text("\(notesWithStep5[adjustedIndex])m")
+                  .font(.system(size: 16, weight: .semibold, design: .monospaced))
+              }
+              .foregroundStyle(.primary)
+            }
+          }
+          .frame(width: 360)
+          
+          RadialLayout {
+            ForEach(notesWithStep5.indices, id: \.self) { index in
+              let adjustedIndex = (index + 5) % 12
+              Button {
+                setStatusText(notesWithStep5[adjustedIndex], type: .diminishedSeventh)
+              } label: {
+                Text("\(notesWithStep5[adjustedIndex])°")
+                  .font(.system(size: 16, weight: .medium))
+              }
+              .foregroundStyle(.primary)
+            }
+          }
+          .frame(width: 250)
+          
+          Circle()
+            .strokeBorder(.black, style: StrokeStyle(lineWidth: 8, dash: [1, 10]))
+            .frame(width: 390)
+            
+          Circle()
+            .strokeBorder(.gray, style: StrokeStyle(lineWidth: 2.5))
+            .frame(width: 278.5)
+          
+          Circle()
+            .strokeBorder(.indigo, style: StrokeStyle(lineWidth: 2.5))
+            .frame(width: 207)
+          
+          ForEach(0..<5) { index in
+            Circle()
+              .strokeBorder(.green, style: StrokeStyle(lineWidth: 2.5))
+              .frame(width: 130 - CGFloat(20 * index))
+          }
         }
-      }
-      .frame(width: 480)
-      
-      RadialLayout {
-        ForEach(keysForSharp.indices, id: \.self) { index in
-          Text("\(keysForSharp[(index + 3) % 12])")
-            .font(.system(size: 20, weight: .semibold))
-        }
-      }
-      .frame(width: 360)
-      
-      RadialLayout {
-        ForEach(keysForSharp.indices, id: \.self) { index in
-          Text("\(keysForSharp[(index + 5) % 12])")
-            .font(.system(size: 16, weight: .medium))
-        }
-      }
-      .frame(width: 250)
-      
-      Circle()
-        .strokeBorder(.black, style: StrokeStyle(lineWidth: 8, dash: [1, 10]))
-        .frame(width: 390)
-        
-      Circle()
-        .strokeBorder(.gray, style: StrokeStyle(lineWidth: 2.5))
-        .frame(width: 278.5)
-      
-      Circle()
-        .strokeBorder(.indigo, style: StrokeStyle(lineWidth: 2.5))
-        .frame(width: 207)
-      
-      ForEach(0..<5) { index in
-        Circle()
-          .strokeBorder(.green, style: StrokeStyle(lineWidth: 2.5))
-          .frame(width: 130 - CGFloat(20 * index))
+      } else {
+        EmptyView()
       }
     }
+    
   }
 }
 
 #Preview {
-  return if #available(iOS 16.0, *) {
-    RadialView2()
-  } else {
-    EmptyView()
-  }
+  RadialView2()
 }

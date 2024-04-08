@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4405302A2BBEFD8500760621 /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 440530292BBEFD8500760621 /* Tonic */; };
+		440C686C2BBF036F000F1A25 /* InteractiveRadialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C686B2BBF036F000F1A25 /* InteractiveRadialView.swift */; };
+		440C686E2BBF0421000F1A25 /* TonicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C686D2BBF0421000F1A25 /* TonicTests.swift */; };
 		448424082BB4787400C99FD7 /* MiracleCircle5App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448424072BB4787400C99FD7 /* MiracleCircle5App.swift */; };
 		4484240A2BB4787400C99FD7 /* CorDataContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448424092BB4787400C99FD7 /* CorDataContentView.swift */; };
 		4484240C2BB4787800C99FD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4484240B2BB4787800C99FD7 /* Assets.xcassets */; };
@@ -40,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		440C686B2BBF036F000F1A25 /* InteractiveRadialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveRadialView.swift; sourceTree = "<group>"; };
+		440C686D2BBF0421000F1A25 /* TonicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonicTests.swift; sourceTree = "<group>"; };
 		448424042BB4787400C99FD7 /* MiracleCircle5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiracleCircle5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		448424072BB4787400C99FD7 /* MiracleCircle5App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiracleCircle5App.swift; sourceTree = "<group>"; };
 		448424092BB4787400C99FD7 /* CorDataContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorDataContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4405302A2BBEFD8500760621 /* Tonic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +138,7 @@
 		4484241C2BB4787800C99FD7 /* MiracleCircle5Tests */ = {
 			isa = PBXGroup;
 			children = (
+				440C686D2BBF0421000F1A25 /* TonicTests.swift */,
 				4484241D2BB4787800C99FD7 /* MiracleCircle5Tests.swift */,
 			);
 			path = MiracleCircle5Tests;
@@ -159,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				44CAA3A72BBD94E8006EF436 /* RadialView2.swift */,
+				440C686B2BBF036F000F1A25 /* InteractiveRadialView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -195,6 +203,9 @@
 			dependencies = (
 			);
 			name = MiracleCircle5;
+			packageProductDependencies = (
+				440530292BBEFD8500760621 /* Tonic */,
+			);
 			productName = MiracleCircle5;
 			productReference = 448424042BB4787400C99FD7 /* MiracleCircle5.app */;
 			productType = "com.apple.product-type.application";
@@ -267,6 +278,9 @@
 				Base,
 			);
 			mainGroup = 448423FB2BB4787400C99FD7;
+			packageReferences = (
+				440530282BBEFD8500760621 /* XCRemoteSwiftPackageReference "Tonic" */,
+			);
 			productRefGroup = 448424052BB4787400C99FD7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -311,6 +325,7 @@
 			files = (
 				448424112BB4787800C99FD7 /* Persistence.swift in Sources */,
 				44CAA3782BB86766006EF436 /* DragActionView.swift in Sources */,
+				440C686C2BBF036F000F1A25 /* InteractiveRadialView.swift in Sources */,
 				44CAA3A82BBD94E8006EF436 /* RadialView2.swift in Sources */,
 				44CAA3A62BBD8FE9006EF436 /* RadialView.swift in Sources */,
 				44CAA3A42BBD8E2D006EF436 /* RadialLayout.swift in Sources */,
@@ -325,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4484241E2BB4787800C99FD7 /* MiracleCircle5Tests.swift in Sources */,
+				440C686E2BBF0421000F1A25 /* TonicTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +668,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		440530282BBEFD8500760621 /* XCRemoteSwiftPackageReference "Tonic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/Tonic.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		440530292BBEFD8500760621 /* Tonic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 440530282BBEFD8500760621 /* XCRemoteSwiftPackageReference "Tonic" */;
+			productName = Tonic;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		448424122BB4787800C99FD7 /* MiracleCircle5.xcdatamodeld */ = {
